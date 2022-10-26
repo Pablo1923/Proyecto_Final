@@ -14,41 +14,96 @@ class WelcomePage extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
-        backgroundColor: Color(0xFF000000),
+        backgroundColor: Color(0xFFE66812),
         body: Center(
           child: Container(
             width: width * 0.95,
             height: height * 0.95,
             decoration: BoxDecoration(
-              color: const Color(0xFF000000),
+              color: const Color(0xFF5AC8FF),
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
-                width: 2,
-                color: const Color(0xFF1EFC01),
+                width: 10,
+                color: const Color(0xFF5711E6),
               ),
             ),
             child: Column(
-              children: const [
-                Text(
+              children: [
+                const Spacer(flex: 1),
+                const Text(
                   'BIENVENIDO',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 30,
-                    color: Color(0xFFD6F0CC),
+                    fontSize: 50,
+                    color: Color(0xFF384BFF),
                   ),
                 ),
-                Spacer(flex: 1),
-                Text(
-                  'Al restaurante restaurante neón más grande de Medellín.',
+                const Spacer(flex: 1),
+                Image.asset(
+                  "assets/beso3.jpg",
+                  height: height * 0.5,
+                  width: height * 0.5,
+                ),
+                const Text(
+                  '¡Por favor inicia sesión!\nQuieremos saber quien eres',
                   style: TextStyle(
-                    fontSize: 17,
+                    fontSize: 20,
                     fontWeight: FontWeight.w300,
-                    color: Color(0xFFD6F0CC),
+                    color: Color(0xFF384BFF),
                   ),
                   textAlign: TextAlign.center,
                 ),
-                Spacer(flex: 1),
-                Spacer(flex: 1),
+                const Text(
+                  'Usuario',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w300,
+                    color: Color(0xFFFF2F00),
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                Container(
+                  child: const SizedBox(
+                    width: 180,
+                    child: TextField(
+                      decoration: InputDecoration(
+                          hintText: "Digite su usuario",
+                          hintStyle: TextStyle(
+                            color: Color(0xFFFAED27),
+                          )),
+                      style: TextStyle(
+                        color: Color(0xFFFAED27),
+                      ),
+                    ),
+                  ),
+                ),
+                const Spacer(flex: 1),
+                const Text(
+                  'Contraseña',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w300,
+                    color: Color(0xFFFF2F00),
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                Container(
+                  child: const SizedBox(
+                    width: 180,
+                    child: TextField(
+                      decoration: InputDecoration(
+                          hintText: "Digite su contraseña",
+                          hintStyle: TextStyle(
+                            color: Color(0xFFFAED27),
+                          )),
+                      style: TextStyle(
+                        color: Color(0xFFFAED27),
+                      ),
+                    ),
+                  ),
+                ),
+                const Spacer(flex: 1),
+                const Spacer(flex: 1),
               ],
             ),
           ),
