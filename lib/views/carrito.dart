@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_final/views/bienvenida.dart';
 import 'package:proyecto_final/views/wcWidgets.dart';
-import 'package:proyecto_final/views/login.dart';
 
 class Carrito extends StatelessWidget {
   const Carrito({Key? key}) : super(key: key);
@@ -33,7 +33,7 @@ class Carrito extends StatelessWidget {
               children: [
                 const Spacer(flex: 1),
                 const Text(
-                  'Nos alegra tenerte aquí',
+                  'Carrito',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 50,
@@ -50,7 +50,7 @@ class Carrito extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return const Login();
+                          return const Bienvenida();
                         },
                       ),
                     );

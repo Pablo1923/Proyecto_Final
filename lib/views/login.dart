@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_final/views/wcWidgets.dart';
-import 'package:proyecto_final/views/menu.dart';
+import 'package:proyecto_final/views/bienvenida.dart';
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
@@ -111,7 +111,7 @@ class Login extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return const Menu();
+                          return const Bienvenida();
                         },
                       ),
                     );

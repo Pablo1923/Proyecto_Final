@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:proyecto_final/views/wcWidgets.dart';
 import 'package:proyecto_final/views/bienvenida.dart';
+import 'package:proyecto_final/views/wcWidgets.dart';
+import 'package:proyecto_final/views/login.dart';
 
-class Login extends StatelessWidget {
-  const Login({Key? key}) : super(key: key);
+class Menu extends StatelessWidget {
+  const Menu({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,7 @@ class Login extends StatelessWidget {
               children: [
                 const Spacer(flex: 1),
                 const Text(
-                  'BIENVENIDO',
+                  'Menu',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 50,
@@ -41,69 +42,8 @@ class Login extends StatelessWidget {
                   ),
                 ),
                 const Spacer(flex: 1),
-                Image.asset(
-                  "assets/beso3.jpg",
-                  height: height * 0.3,
-                  width: height * 0.3,
-                ),
-                const Text(
-                  '¡Por favor inicia sesión!\nQuieremos saber quien eres',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w300,
-                    color: Color(0xFF384BFF),
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const Text(
-                  'Usuario',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w300,
-                    color: Color(0xFFFF2F00),
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                Container(
-                  child: const SizedBox(
-                    width: 180,
-                    child: TextField(
-                      decoration: InputDecoration(
-                          hintText: "Digite su usuario",
-                          hintStyle: TextStyle(
-                            color: Color(0xFFFAED27),
-                          )),
-                      style: TextStyle(
-                        color: Color(0xFFFAED27),
-                      ),
-                    ),
-                  ),
-                ),
-                const Spacer(flex: 1),
-                const Text(
-                  'Contraseña',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w300,
-                    color: Color(0xFFFF2F00),
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                Container(
-                  child: const SizedBox(
-                    width: 180,
-                    child: TextField(
-                      decoration: InputDecoration(
-                          hintText: "Digite su contraseña",
-                          hintStyle: TextStyle(
-                            color: Color(0xFFFAED27),
-                          )),
-                      style: TextStyle(
-                        color: Color(0xFFFAED27),
-                      ),
-                    ),
-                  ),
-                ),
+
+                //Boton 1
                 button(
                   //Menupage
                   () {
@@ -117,12 +57,10 @@ class Login extends StatelessWidget {
                     );
                   },
                   const Color(0xFF000000),
-                  "Inicia sesión",
+                  "Volver",
                   180,
                   40,
                 ),
-                const Spacer(flex: 1),
-                const Spacer(flex: 1),
               ],
             ),
           ),

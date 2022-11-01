@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_final/views/carrito.dart';
+import 'package:proyecto_final/views/menu.dart';
+import 'package:proyecto_final/views/reservas.dart';
 import 'package:proyecto_final/views/wcWidgets.dart';
 import 'package:proyecto_final/views/login.dart';
 
-class Menu extends StatelessWidget {
-  const Menu({Key? key}) : super(key: key);
+class Bienvenida extends StatelessWidget {
+  const Bienvenida({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +53,7 @@ class Menu extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return const Login();
+                          return const Menu();
                         },
                       ),
                     );
@@ -70,7 +73,7 @@ class Menu extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return const Login();
+                          return const Reservas();
                         },
                       ),
                     );
@@ -89,7 +92,7 @@ class Menu extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return const Login();
+                          return const Carrito();
                         },
                       ),
                     );
