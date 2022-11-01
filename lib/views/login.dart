@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_final/views/wcWidgets.dart';
 import 'package:proyecto_final/views/menu.dart';
 
-class WelcomePage extends StatelessWidget {
-  const WelcomePage({Key? key}) : super(key: key);
+class Login extends StatelessWidget {
+  const Login({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +43,8 @@ class WelcomePage extends StatelessWidget {
                 const Spacer(flex: 1),
                 Image.asset(
                   "assets/beso3.jpg",
-                  height: height * 0.5,
-                  width: height * 0.5,
+                  height: height * 0.3,
+                  width: height * 0.3,
                 ),
                 const Text(
                   '¡Por favor inicia sesión!\nQuieremos saber quien eres',
