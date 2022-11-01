@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_final/views/wcWidgets.dart';
-import 'package:proyecto_final/views/login.dart';
+import 'package:proyecto_final/views/bienvenida.dart';
 
-class Menu extends StatelessWidget {
-  const Menu({Key? key}) : super(key: key);
+class Login extends StatelessWidget {
+  const Login({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +31,7 @@ class Menu extends StatelessWidget {
             ),
             child: Column(
               children: [
+                const Spacer(flex: 1),
                 const Text(
                   'BIENVENIDO',
                   style: TextStyle(
@@ -39,10 +40,11 @@ class Menu extends StatelessWidget {
                     color: Color(0xFF384BFF),
                   ),
                 ),
+                const Spacer(flex: 1),
                 Image.asset(
                   "assets/beso3.jpg",
-                  height: height * 0.02,
-                  width: height * 0.02,
+                  height: height * 0.3,
+                  width: height * 0.3,
                 ),
                 const Text(
                   '¡Por favor inicia sesión!\nQuieremos saber quien eres',
@@ -109,7 +111,7 @@ class Menu extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return const Login();
+                          return const Bienvenida();
                         },
                       ),
                     );
