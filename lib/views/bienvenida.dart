@@ -121,6 +121,7 @@ class Bienvenida extends StatelessWidget {
                   180,
                   40,
                 ),
+                const Spacer(flex: 1),
               ],
             ),
           ),
