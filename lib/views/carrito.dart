@@ -2,9 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:proyecto_final/views/bienvenida.dart';
 import 'package:proyecto_final/views/wcWidgets.dart';
 
-class Carrito extends StatelessWidget {
+class Carrito extends StatefulWidget {
   const Carrito({Key? key}) : super(key: key);
 
+  @override
+  State<Carrito> createState() => _carrito();
+}
+
+class _carrito extends State<Carrito> {
+  String? sed = "Seleccionar sede";
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -30,11 +36,6 @@ class Carrito extends StatelessWidget {
             ),
             child: Column(
               children: [
-                Image.asset(
-                  "assets/neon2.png",
-                  height: height * 0.125,
-                  width: height * 0.125,
-                ),
                 const Spacer(flex: 1),
                 const Text(
                   'Ingrese su nombre',
@@ -143,7 +144,7 @@ class Carrito extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return const WelcomePage();
+                          return const Bienvenida();
                         },
                       ),
                     );
@@ -159,7 +160,7 @@ class Carrito extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return const WelcomePage();
+                          return const Bienvenida();
                         },
                       ),
                     );
