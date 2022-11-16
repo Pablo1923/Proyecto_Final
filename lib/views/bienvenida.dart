@@ -14,7 +14,7 @@ class Bienvenida extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Neon foodies',
+      title: 'KissApp',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
