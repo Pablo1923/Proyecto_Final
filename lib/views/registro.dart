@@ -2,10 +2,37 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:proyecto_final/views/wcWidgets.dart';
 import 'package:proyecto_final/views/bienvenida.dart';
-import 'package:proyecto_final/views/registro.dart';
 
-class Login extends StatelessWidget {
-  const Login({Key? key}) : super(key: key);
+class User {
+  String id;
+  final String name;
+  final String user;
+  final String password;
+  final int credits;
+
+  User({
+    this.id = '',
+    required this.name,
+    required this.user,
+    required this.password,
+    required this.credits,
+  });
+
+  Map<String, dynamic> ToJson() => {
+        'id': id,
+        'name': name,
+        'username': user,
+        'password': password,
+        'credit': credits,
+      };
+}
+
+class Signup extends StatelessWidget {
+  Signup({Key? key}) : super(key: key);
+
+  final controllerName = TextEditingController();
+  final controllerUser = TextEditingController();
+  final controllerPassword = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +40,7 @@ class Login extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Neon foodies',
+      title: 'Registrarse',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -50,7 +77,7 @@ class Login extends StatelessWidget {
                 ),
                 const Spacer(flex: 1),
                 const Text(
-                  '¡Por favor inicia sesión!\nQuieremos saber quien eres',
+                  'Ingresa tus datos',
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w300,
@@ -60,7 +87,7 @@ class Login extends StatelessWidget {
                 ),
                 const Spacer(flex: 1),
                 const Text(
-                  'Usuario',
+                  'Nombre completo',
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w300,
@@ -69,15 +96,42 @@ class Login extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 Container(
-                  child: const SizedBox(
+                  child: SizedBox(
                     width: 180,
                     child: TextField(
-                      decoration: InputDecoration(
+                      controller: controllerName,
+                      decoration: const InputDecoration(
+                          hintText: "Digite su nombre",
+                          hintStyle: TextStyle(
+                            color: Color(0xFFFAED27),
+                          )),
+                      style: const TextStyle(
+                        color: Color(0xFFFAED27),
+                      ),
+                    ),
+                  ),
+                ),
+                const Spacer(flex: 1),
+                const Text(
+                  'Nombre de usuario',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w300,
+                    color: Color(0xFFFF2F00),
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                Container(
+                  child: SizedBox(
+                    width: 180,
+                    child: TextField(
+                      controller: controllerUser,
+                      decoration: const InputDecoration(
                           hintText: "Digite su usuario",
                           hintStyle: TextStyle(
                             color: Color(0xFFFAED27),
                           )),
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Color(0xFFFAED27),
                       ),
                     ),
@@ -94,15 +148,16 @@ class Login extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 Container(
-                  child: const SizedBox(
+                  child: SizedBox(
                     width: 180,
                     child: TextField(
-                      decoration: InputDecoration(
+                      controller: controllerPassword,
+                      decoration: const InputDecoration(
                           hintText: "Digite su contraseña",
                           hintStyle: TextStyle(
                             color: Color(0xFFFAED27),
                           )),
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Color(0xFFFAED27),
                       ),
                     ),
@@ -112,46 +167,24 @@ class Login extends StatelessWidget {
                 button(
                   //Menupage
                   () {
-                    getUsers();
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) {
+                          final user = User(
+                            name: controllerName.text,
+                            user: controllerUser.text,
+                            password: controllerPassword.text,
+                            credits: 0,
+                          );
+                          createUser(user);
                           return const Bienvenida();
                         },
                       ),
                     );
                   },
                   const Color(0xFF000000),
-                  "Inicia sesión",
-                  180,
-                  40,
-                ),
-                const Spacer(flex: 1),
-                const Text(
-                  '¿No tienes cuenta aún?',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w300,
-                    color: Color(0xFF384BFF),
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const Spacer(flex: 1),
-                button(
-                  //Menupage
-                  () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return Signup();
-                        },
-                      ),
-                    );
-                  },
-                  const Color(0xFF000000),
-                  "Regístrate",
+                  "Registrarse",
                   180,
                   40,
                 ),
@@ -164,15 +197,10 @@ class Login extends StatelessWidget {
     );
   }
 
-  void getUsers() async {
-    CollectionReference collection =
-        FirebaseFirestore.instance.collection("users");
-    QuerySnapshot users = await collection.get();
-
-    if (users.docs.isNotEmpty) {
-      for (var doc in users.docs) {
-        print(doc.data());
-      }
-    }
+  void createUser(User user) async {
+    final doc = FirebaseFirestore.instance.collection('users').doc();
+    user.id = doc.id;
+    var json = user.ToJson();
+    await doc.set(json);
   }
 }
