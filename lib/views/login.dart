@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:proyecto_final/views/wcWidgets.dart';
 import 'package:proyecto_final/views/bienvenida.dart';
@@ -16,7 +17,7 @@ class Login extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
-        backgroundColor: Color(0xFFE66812),
+        backgroundColor: const Color(0xFFE66812),
         body: Center(
           child: Container(
             width: width * 0.95,
@@ -46,6 +47,7 @@ class Login extends StatelessWidget {
                   height: height * 0.3,
                   width: height * 0.3,
                 ),
+                const Spacer(flex: 1),
                 const Text(
                   '¡Por favor inicia sesión!\nQuieremos saber quien eres',
                   style: TextStyle(
@@ -55,6 +57,7 @@ class Login extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
+                const Spacer(flex: 1),
                 const Text(
                   'Usuario',
                   style: TextStyle(
@@ -104,9 +107,11 @@ class Login extends StatelessWidget {
                     ),
                   ),
                 ),
+                const Spacer(flex: 1),
                 button(
                   //Menupage
                   () {
+                    getUsers();
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -121,13 +126,24 @@ class Login extends StatelessWidget {
                   180,
                   40,
                 ),
-                const Spacer(flex: 1),
-                const Spacer(flex: 1),
+                const Spacer(flex: 2),
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  void getUsers() async {
+    CollectionReference collection =
+        FirebaseFirestore.instance.collection("users");
+    QuerySnapshot users = await collection.get();
+
+    if (users.docs.isNotEmpty) {
+      for (var doc in users.docs) {
+        print(doc.data());
+      }
+    }
   }
 }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "882238690514",
+    "project_id": "shopping-bd-ingsft",
+    "storage_bucket": "shopping-bd-ingsft.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:882238690514:android:f934300bbfbc2b7354890b",
+        "android_client_info": {
+          "package_name": "com.example.proyecto_final"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "882238690514-b9cqdntb79m5vbesrhinmhjjkbech3um.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUvwqAOu_k_e3Q2vN4cWblGfBDPwXEdbE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "882238690514-b9cqdntb79m5vbesrhinmhjjkbech3um.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
