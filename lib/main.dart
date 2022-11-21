@@ -22,8 +22,8 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Scaffold(
-        backgroundColor: Color(0xFF000000),
+      home: Scaffold(
+        backgroundColor: const Color(0xFF000000),
         body: Login(),
       ),
     );

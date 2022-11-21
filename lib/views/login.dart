@@ -5,7 +5,9 @@ import 'package:proyecto_final/views/bienvenida.dart';
 import 'package:proyecto_final/views/registro.dart';
 
 class Login extends StatelessWidget {
-  const Login({Key? key}) : super(key: key);
+  Login({Key? key}) : super(key: key);
+  final controllerUser = TextEditingController();
+  final controllerPassword = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +15,7 @@ class Login extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Neon foodies',
+      title: 'Login',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -69,15 +71,16 @@ class Login extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 Container(
-                  child: const SizedBox(
+                  child: SizedBox(
                     width: 180,
                     child: TextField(
-                      decoration: InputDecoration(
+                      controller: controllerUser,
+                      decoration: const InputDecoration(
                           hintText: "Digite su usuario",
                           hintStyle: TextStyle(
                             color: Color(0xFFFAED27),
                           )),
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Color(0xFFFAED27),
                       ),
                     ),
@@ -94,15 +97,16 @@ class Login extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 Container(
-                  child: const SizedBox(
+                  child: SizedBox(
                     width: 180,
                     child: TextField(
-                      decoration: InputDecoration(
+                      controller: controllerPassword,
+                      decoration: const InputDecoration(
                           hintText: "Digite su contraseña",
                           hintStyle: TextStyle(
                             color: Color(0xFFFAED27),
                           )),
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Color(0xFFFAED27),
                       ),
                     ),
@@ -111,16 +115,28 @@ class Login extends StatelessWidget {
                 const Spacer(flex: 1),
                 button(
                   //Menupage
-                  () {
-                    getUsers();
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return const Bienvenida();
-                        },
-                      ),
-                    );
+                  () async {
+                    int ok = await getUsers(controllerUser.toString(),
+                        controllerPassword.toString());
+                    if (ok == 1) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const Bienvenida();
+                          },
+                        ),
+                      );
+                    } else {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return Signup();
+                          },
+                        ),
+                      );
+                    }
                   },
                   const Color(0xFF000000),
                   "Inicia sesión",
@@ -164,15 +180,16 @@ class Login extends StatelessWidget {
     );
   }
 
-  void getUsers() async {
-    CollectionReference collection =
-        FirebaseFirestore.instance.collection("users");
-    QuerySnapshot users = await collection.get();
-
-    if (users.docs.isNotEmpty) {
-      for (var doc in users.docs) {
-        print(doc.data());
-      }
+  Future<int> getUsers(String username, String password) async {
+    final querySnapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .limit(1)
+        .where('username', isEqualTo: username)
+        .get();
+    if (querySnapshot.docs.isEmpty) {
+      return 0;
+    } else {
+      return 1;
     }
   }
 }

@@ -22,7 +22,7 @@ class _Reservas extends State<Reservas> {
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
-        backgroundColor: Color.fromARGB(255, 18, 223, 230),
+        backgroundColor: const Color.fromARGB(255, 18, 223, 230),
         body: Center(
           child: Column(
             children: [
