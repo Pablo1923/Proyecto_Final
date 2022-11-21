@@ -1,6 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:proyecto_final/views/bienvenida.dart';
 import 'package:proyecto_final/views/wcWidgets.dart';
+
+class Location {
+  String id;
+  final String name;
+  final int max;
+  final int available;
+
+  Location({
+    this.id = '',
+    required this.name,
+    required this.max,
+    required this.available,
+  });
+
+  Map<String, dynamic> ToJson() => {
+        'id': id,
+        'name': name,
+        'max': max,
+        'available': available,
+      };
+}
+
+class Reserva {
+  String id;
+  final String time;
+  final String day;
+  final String location;
+
+  Reserva({
+    this.id = '',
+    required this.time,
+    required this.day,
+    required this.location,
+  });
+
+  Map<String, dynamic> ToJson() => {
+        'id': id,
+        'time': time,
+        'day': day,
+        'location': location,
+      };
+}
 
 class Reservas extends StatefulWidget {
   const Reservas({Key? key}) : super(key: key);
@@ -10,7 +53,7 @@ class Reservas extends StatefulWidget {
 }
 
 class _Reservas extends State<Reservas> {
-  String? sed = "Seleccionar sede";
+  String sed = "Seleccionar sede";
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -78,11 +121,11 @@ class _Reservas extends State<Reservas> {
                     'Sabaneta',
                     'Centro',
                   ].map((String value) {
-                    return new DropdownMenuItem<String>(
+                    return DropdownMenuItem<String>(
                       value: value,
-                      child: new Text(
+                      child: Text(
                         value,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Color.fromARGB(255, 3, 7, 14),
                         ),
                       ),
@@ -90,10 +133,10 @@ class _Reservas extends State<Reservas> {
                   }).toList(),
                   onChanged: (String? newValue) {
                     setState(() {
-                      sed = newValue;
+                      sed = newValue ?? 'Poblado';
                     });
                   },
-                  dropdownColor: Color.fromARGB(255, 12, 88,
+                  dropdownColor: const Color.fromARGB(255, 12, 88,
                       187), //Este te da color de fondo en la lista de selección
                 ),
               ),
@@ -134,6 +177,7 @@ class _Reservas extends State<Reservas> {
                     context,
                     MaterialPageRoute(
                       builder: (context) {
+                        createLocation(sed);
                         return const Bienvenida();
                       },
                     ),
@@ -165,5 +209,21 @@ class _Reservas extends State<Reservas> {
         ),
       ),
     );
+  }
+
+  void createLocation(String location) async {
+    if (location == 'Poblado') {
+      final list = await FirebaseFirestore.instance
+          .collection('locations')
+          .limit(1)
+          .where('name', isEqualTo: 'Poblado')
+          .get();
+      int av = list.docs[0].get('available');
+      av--;
+      FirebaseFirestore.instance
+          .collection('locations')
+          .doc('001')
+          .update({'available': av});
+    }
   }
 }
